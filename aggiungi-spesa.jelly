@@ -1,0 +1,35 @@
+#Color: blue
+
+import Shortcuts
+
+var importo = Ask for Input(prompt: "Importo (€)", inputType: Number)
+
+var listaCategorie = ["Svago", "Ristoranti", "Trasporti", "Spesa alimentare", "Casa/Bollette", "Salute", "Abbigliamento", "Altro"]
+var categoria = Choose from List(listaCategorie, prompt: "Categoria")
+
+var nota = Ask for Input(prompt: "Nota (opzionale)", inputType: Text)
+
+var listaTipo = ["Personale", "Casa", "Anticipo"]
+var tipo = Choose from List(listaTipo, prompt: "Tipo spesa")
+
+var listaMetodo = ["Contanti", "Carta"]
+var metodo = Choose from List(listaMetodo, prompt: "Pagamento")
+
+var listaChi = ["Alfredo", "Alessandra"]
+var chi = Choose from List(listaChi, prompt: "Chi paga?")
+
+var risposta = Get Contents of URL(
+  url: "https://script.google.com/macros/s/AKfycbx1FvcuXpiNatPzlqwjBceojs1ATePvJXJt_c-55Kf1nW1Dc8ThGC9heHO907JWHjgR/exec",
+  method: POST,
+  requestBodyType: JSON,
+  requestBody: {
+    "importo": importo,
+    "categoria": categoria,
+    "nota": nota,
+    "tipo": tipo,
+    "metodo": metodo,
+    "chi": chi
+  }
+)
+
+Show Result(risposta)
